@@ -29,11 +29,11 @@
             left: 50%;
             transform: translate(-50%, -50%);
             opacity: 1;
-            animation: shrink 2s forwards;
+            animation: appearAndShrink 4s forwards; /* 2 Sekunden lang erscheinen, 2 Sekunden schrumpfen */
         }
 
-        /* Die Animation für das Schrumpfen und Einfügen in die Liste */
-        @keyframes shrink {
+        /* Die Animation für das Erscheinen und Schrumpfen */
+        @keyframes appearAndShrink {
             0% {
                 transform: translate(-50%, -50%) scale(3);
                 opacity: 1;
@@ -125,7 +125,7 @@
                         revealButton.style.backgroundColor = "#d3d3d3";
                         revealButton.style.cursor = "not-allowed";
                     }
-                }, 2000); // Zeit für das Ende der Animation
+                }, 4000); // Zeit für das Ende der Animation (4 Sekunden insgesamt)
             }
         }
     </script>
