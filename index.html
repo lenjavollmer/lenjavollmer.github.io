@@ -6,7 +6,7 @@
     <title>Chocoloco Randomizer</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding-top: 50px; text-align: center; }
-        h1 { color: #5c3317; font-size: 2em; font-family: 'Comic Sans MS', cursive, sans-serif; text-shadow: 2px 2px #8b4513; }
+        h1 { color: #5c3317; font-size: 2.5em; font-family: 'Pacifico', cursive; text-shadow: 3px 3px #8b4513; }
         ul { padding-left: 20px; text-align: left; }
         button, input { display: block; width: 100%; margin-top: 10px; padding: 10px; box-sizing: border-box; border: none; font-weight: bold; }
         button:nth-of-type(1) { background-color: #32cd32; color: white; }
@@ -16,6 +16,7 @@
         #revealButton { background-color: #d3d3d3; color: white; cursor: not-allowed; }
         #revealButton:enabled { background-color: #1e90ff; cursor: pointer; }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>🍫 Chocoloco Randomizer 🍫</h1>
@@ -23,9 +24,9 @@
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
     <button onclick="shuffleNames()">Namen mischen</button>
-    <button onclick="revealNextName()" disabled id="revealButton">Namen aufdecken</button>
+    <button onclick="revealNextName()" disabled id="revealButton">Namen aufdecken (0/0)</button>
     <ul id="shuffledList"></ul>
-    <audio id="drumroll" src="https://www.fesliyanstudios.com/play-mp3/4387"></audio>
+    <audio id="drumroll" src="https://www.fesliyanstudios.com/play-mp3/342"></audio>
 
     <script>
         let names = [];
@@ -66,6 +67,7 @@
             revealButton.disabled = false;
             revealButton.style.backgroundColor = "#1e90ff";
             revealButton.style.cursor = "pointer";
+            revealButton.textContent = `Namen aufdecken (0/${shuffledNames.length})`;
         }
 
         function revealNextName() {
@@ -77,8 +79,9 @@
                     li.textContent = shuffledNames[currentIndex];
                     list.appendChild(li);
                     currentIndex++;
+                    let revealButton = document.getElementById("revealButton");
+                    revealButton.textContent = `Namen aufdecken (${currentIndex}/${shuffledNames.length})`;
                     if (currentIndex >= shuffledNames.length) {
-                        let revealButton = document.getElementById("revealButton");
                         revealButton.disabled = true;
                         revealButton.style.backgroundColor = "#d3d3d3";
                         revealButton.style.cursor = "not-allowed";
