@@ -18,6 +18,32 @@
         button:hover { opacity: 0.8; cursor: pointer; }
         #revealButton { background-color: #d3d3d3; color: white; cursor: not-allowed; }
         #revealButton:enabled { background-color: #1e90ff; cursor: pointer; }
+
+        /* Neue Animation für das Erscheinen des Namens */
+        .name-reveal {
+            font-size: 3em;
+            font-weight: bold;
+            color: #1e90ff;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            animation: shrink 2s forwards;
+        }
+
+        /* Die Animation für das Schrumpfen und Einfügen in die Liste */
+        @keyframes shrink {
+            0% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+                top: 80%; /* Position für das Hinzufügen in die Liste */
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
@@ -29,8 +55,6 @@
     <button onclick="shuffleNames()">Namen mischen</button>
     <button onclick="revealNextName()" disabled id="revealButton">Namen aufdecken (0/0)</button>
     <ol id="shuffledList"></ol>
-    <!-- Hier der neue Soundeffekt von Pixabay -->
-    <audio id="drumroll" src="https://cdn.pixabay.com/download/audio/2023/03/19/84943_8da6d75b9d5d007a14bb1159f9b128ab.mp3" preload="auto"></audio>
 
     <script>
         let names = [];
@@ -76,13 +100,20 @@
 
         function revealNextName() {
             if (currentIndex < shuffledNames.length) {
-                document.getElementById("drumroll").play();
+                // Unverzögertes Erscheinen des Namens
+                let nameElement = document.createElement("div");
+                nameElement.classList.add("name-reveal");
+                nameElement.textContent = shuffledNames[currentIndex];
+                document.body.appendChild(nameElement);
+
+                // Nach der Animation in die Liste einfügen
                 setTimeout(() => {
                     let list = document.getElementById("shuffledList");
                     let li = document.createElement("li");
                     li.textContent = shuffledNames[currentIndex];
                     list.appendChild(li);
                     currentIndex++;
+
                     let revealButton = document.getElementById("revealButton");
                     revealButton.textContent = `Namen aufdecken (${currentIndex}/${shuffledNames.length})`;
                     if (currentIndex >= shuffledNames.length) {
@@ -90,7 +121,7 @@
                         revealButton.style.backgroundColor = "#d3d3d3";
                         revealButton.style.cursor = "not-allowed";
                     }
-                }, 1500); // Verzögerung für den Trommelwirbel
+                }, 2000); // Zeit für das Ende der Animation
             }
         }
     </script>
