@@ -23,7 +23,7 @@
         .name-reveal {
             font-size: 3em;
             font-weight: bold;
-            color: #1e90ff;
+            color: black; /* Name jetzt schwarz */
             position: absolute;
             top: 40%;
             left: 50%;
@@ -35,6 +35,10 @@
         /* Die Animation für das Schrumpfen und Einfügen in die Liste */
         @keyframes shrink {
             0% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 1;
+            }
+            50% {
                 transform: translate(-50%, -50%) scale(3);
                 opacity: 1;
             }
