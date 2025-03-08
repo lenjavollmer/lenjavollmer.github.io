@@ -5,90 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chocoloco Randomizer</title>
     <style>
-        /* Hintergrundbild für das Schokoladen- und Universumsthema */
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: auto;
-            padding-top: 50px;
-            text-align: center;
-            background: linear-gradient(135deg, #4e2607, #2f1a0e, #0d1a2b); /* Schokoladenfarben zu dunklem Universum */
-            background-size: cover;
-            color: white; /* Textfarbe für gute Lesbarkeit */
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding-top: 50px; text-align: center; }
+        h1 { 
+            color: #4e2607; 
+            font-size: 2.8em; 
+            font-family: 'Lobster', cursive; 
+            /* Text-Schatten entfernt */
+            text-shadow: none; 
         }
-
-        h1 {
-            color: #fff;
-            font-size: 2.8em;
-            font-family: 'Lobster', cursive;
-            text-shadow: none;
-            z-index: 1;
-        }
-
-        ul {
-            padding-left: 20px;
-            text-align: left;
-            list-style-type: disc;
-        }
-
-        li {
-            padding-left: 10px;
-        }
-
-        ol {
-            padding-left: 20px;
-            text-align: left;
-            list-style-type: decimal;
-        }
-
-        button, input {
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            box-sizing: border-box;
-            border: none;
-            font-weight: bold;
-        }
-
-        input {
-            border: 2px solid #5c3317;
-            padding: 8px;
-        }
-
-        button:nth-of-type(1) {
-            background-color: #32cd32;
-            color: white;
-        }
-
-        button:nth-of-type(2) {
-            background-color: #ff69b4;
-            color: white;
-        }
-
-        button:nth-of-type(3) {
-            background-color: #1e90ff;
-            color: white;
-        }
-
-        button:hover {
-            opacity: 0.8;
-            cursor: pointer;
-        }
-
-        #revealButton {
-            background-color: #d3d3d3;
-            color: white;
-            cursor: not-allowed;
-        }
-
-        #revealButton:enabled {
-            background-color: #1e90ff;
-            cursor: pointer;
-        }
+        ul { padding-left: 20px; text-align: left; list-style-type: disc; }
+        li { padding-left: 10px; }
+        ol { padding-left: 20px; text-align: left; list-style-type: decimal; }
+        button, input { display: block; width: 100%; margin-top: 10px; padding: 10px; box-sizing: border-box; border: none; font-weight: bold; }
+        input { border: 2px solid #5c3317; padding: 8px; }
+        button:nth-of-type(1) { background-color: #32cd32; color: white; }
+        button:nth-of-type(2) { background-color: #ff69b4; color: white; }
+        button:nth-of-type(3) { background-color: #1e90ff; color: white; }
+        button:hover { opacity: 0.8; cursor: pointer; }
+        #revealButton { background-color: #d3d3d3; color: white; cursor: not-allowed; }
+        #revealButton:enabled { background-color: #1e90ff; cursor: pointer; }
 
         /* Neue Animation für das Erscheinen des Namens */
         .name-reveal {
@@ -100,7 +35,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             opacity: 1;
-            animation: appearAndShrink 3s forwards;
+            animation: appearAndShrink 3s forwards; /* Name bleibt 2 Sekunden groß, schrumpft dann */
         }
 
         /* Die Animation für das Erscheinen und Schrumpfen */
@@ -109,32 +44,21 @@
                 transform: translate(-50%, -50%) scale(3); /* Sehr groß */
                 opacity: 1;
             }
-
             50% {
                 transform: translate(-50%, -50%) scale(3); /* Bleibt groß für 1-2 Sekunden */
                 opacity: 1;
             }
-
             100% {
                 transform: translate(-50%, -50%) scale(1); /* Schrumpft auf normale Größe */
                 opacity: 0;
             }
-        }
-
-        /* Hinzufügen von Konfetti */
-        .confetti-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 10;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
 </head>
 <body>
-    <h1>🍫 Chocoloco Randomizer 🍫</h1>
+    <h1>Chocoloco Randomizer</h1>
     <input type="text" id="nameInput" placeholder="Namen eingeben" onkeydown="handleKeyPress(event)">
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
