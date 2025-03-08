@@ -15,10 +15,13 @@
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
     <button onclick="shuffleNames()">Namen mischen</button>
+    <button onclick="revealNextName()" disabled id="revealButton">Namen aufdecken</button>
     <ul id="shuffledList"></ul>
 
     <script>
         let names = [];
+        let shuffledNames = [];
+        let currentIndex = 0;
 
         function addName() {
             let input = document.getElementById("nameInput");
@@ -41,14 +44,23 @@
         }
 
         function shuffleNames() {
-            let shuffled = [...names].sort(() => Math.random() - 0.5);
-            let list = document.getElementById("shuffledList");
-            list.innerHTML = "";
-            shuffled.forEach(n => {
+            shuffledNames = [...names].sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            document.getElementById("shuffledList").innerHTML = "";
+            document.getElementById("revealButton").disabled = false;
+        }
+
+        function revealNextName() {
+            if (currentIndex < shuffledNames.length) {
+                let list = document.getElementById("shuffledList");
                 let li = document.createElement("li");
-                li.textContent = n;
+                li.textContent = shuffledNames[currentIndex];
                 list.appendChild(li);
-            });
+                currentIndex++;
+                if (currentIndex >= shuffledNames.length) {
+                    document.getElementById("revealButton").disabled = true;
+                }
+            }
         }
     </script>
 </body>
