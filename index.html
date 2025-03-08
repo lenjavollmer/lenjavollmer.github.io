@@ -25,27 +25,26 @@
             font-weight: bold;
             color: black; /* Name jetzt schwarz */
             position: absolute;
-            top: 40%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             opacity: 1;
-            animation: appearAndShrink 4s forwards; /* 2 Sekunden lang erscheinen, 2 Sekunden schrumpfen */
+            animation: appearAndShrink 3s forwards; /* Name bleibt 2 Sekunden groß, schrumpft dann */
         }
 
         /* Die Animation für das Erscheinen und Schrumpfen */
         @keyframes appearAndShrink {
             0% {
-                transform: translate(-50%, -50%) scale(3);
+                transform: translate(-50%, -50%) scale(3); /* Sehr groß */
                 opacity: 1;
             }
             50% {
-                transform: translate(-50%, -50%) scale(3);
+                transform: translate(-50%, -50%) scale(3); /* Bleibt groß für 1-2 Sekunden */
                 opacity: 1;
             }
             100% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(1); /* Schrumpft auf normale Größe */
                 opacity: 0;
-                top: 80%; /* Position für das Hinzufügen in die Liste */
             }
         }
     </style>
@@ -134,7 +133,7 @@
                         revealButton.style.backgroundColor = "#d3d3d3";
                         revealButton.style.cursor = "not-allowed";
                     }
-                }, 4000); // Zeit für das Ende der Animation (4 Sekunden insgesamt)
+                }, 3000); // Zeit für das Ende der Animation (3 Sekunden insgesamt)
             }
         }
     </script>
