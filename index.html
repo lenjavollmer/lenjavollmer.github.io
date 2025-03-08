@@ -10,6 +10,7 @@
             color: #4e2607; 
             font-size: 2.8em; 
             font-family: 'Lobster', cursive; 
+            /* Text-Schatten entfernt */
             text-shadow: none; 
         }
         ul { padding-left: 20px; text-align: left; list-style-type: disc; }
@@ -24,29 +25,31 @@
         #revealButton { background-color: #d3d3d3; color: white; cursor: not-allowed; }
         #revealButton:enabled { background-color: #1e90ff; cursor: pointer; }
 
+        /* Neue Animation für das Erscheinen des Namens */
         .name-reveal {
             font-size: 3em;
             font-weight: bold;
-            color: black;
+            color: black; /* Name jetzt schwarz */
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             opacity: 1;
-            animation: appearAndShrink 3s forwards;
+            animation: appearAndShrink 3s forwards; /* Name bleibt 2 Sekunden groß, schrumpft dann */
         }
 
+        /* Die Animation für das Erscheinen und Schrumpfen */
         @keyframes appearAndShrink {
             0% {
-                transform: translate(-50%, -50%) scale(3);
+                transform: translate(-50%, -50%) scale(3); /* Sehr groß */
                 opacity: 1;
             }
             50% {
-                transform: translate(-50%, -50%) scale(3);
+                transform: translate(-50%, -50%) scale(3); /* Bleibt groß für 1-2 Sekunden */
                 opacity: 1;
             }
             100% {
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(1); /* Schrumpft auf normale Größe */
                 opacity: 0;
             }
         }
@@ -105,45 +108,15 @@
             revealButton.textContent = `Namen aufdecken (0/${shuffledNames.length})`;
         }
 
-        function getRandomParticleType() {
-            // Zufällige Auswahl des Partikels
-            const types = ['confetti', 'hearts', 'chocolates'];
-            return types[Math.floor(Math.random() * types.length)];
-        }
-
         function revealNextName() {
             if (currentIndex < shuffledNames.length) {
-                const particleType = getRandomParticleType();
-
                 // Konfetti-Explosion starten
-                if (particleType === 'confetti') {
-                    confetti({
-                        particleCount: 150,
-                        spread: 70,
-                        origin: { x: 0.5, y: 0.5 },
-                        colors: ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff']
-                    });
-                }
-                // Herzen-Explosion
-                else if (particleType === 'hearts') {
-                    confetti({
-                        particleCount: 150,
-                        spread: 50,
-                        origin: { x: 0.5, y: 0.5 },
-                        shapes: ['heart'],
-                        colors: ['#ff0000', '#ff69b4', '#ff1493']
-                    });
-                }
-                // Schokoladenpartikel
-                else if (particleType === 'chocolates') {
-                    confetti({
-                        particleCount: 150,
-                        spread: 50,
-                        origin: { x: 0.5, y: 0.5 },
-                        shapes: ['square'],
-                        colors: ['#3e2b2b', '#6f4f37', '#d2691e']
-                    });
-                }
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { x: 0.5, y: 0.5 }, // Explosion in der Mitte des Bildschirms
+                    colors: ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff']
+                });
 
                 // Unverzögertes Erscheinen des Namens
                 let nameElement = document.createElement("div");
@@ -151,6 +124,7 @@
                 nameElement.textContent = shuffledNames[currentIndex];
                 document.body.appendChild(nameElement);
 
+                // Nach der Animation in die Liste einfügen
                 setTimeout(() => {
                     let list = document.getElementById("shuffledList");
                     let li = document.createElement("li");
@@ -165,7 +139,7 @@
                         revealButton.style.backgroundColor = "#d3d3d3";
                         revealButton.style.cursor = "not-allowed";
                     }
-                }, 3000); // Zeit für das Ende der Animation (3 Sekunden)
+                }, 3000); // Zeit für das Ende der Animation (3 Sekunden insgesamt)
             }
         }
     </script>
