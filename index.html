@@ -6,9 +6,10 @@
     <title>Chocoloco Randomizer</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding-top: 50px; text-align: center; }
-        h1 { color: #5c3317; font-size: 2.5em; font-family: 'Pacifico', cursive; text-shadow: 3px 3px #8b4513; }
+        h1 { color: #4e2607; font-size: 2.8em; font-family: 'Lobster', cursive; text-shadow: 4px 4px #a0522d; }
         ul { padding-left: 20px; text-align: left; }
         button, input { display: block; width: 100%; margin-top: 10px; padding: 10px; box-sizing: border-box; border: none; font-weight: bold; }
+        input { border: 2px solid #5c3317; padding: 8px; }
         button:nth-of-type(1) { background-color: #32cd32; color: white; }
         button:nth-of-type(2) { background-color: #ff69b4; color: white; }
         button:nth-of-type(3) { background-color: #1e90ff; color: white; }
@@ -16,17 +17,17 @@
         #revealButton { background-color: #d3d3d3; color: white; cursor: not-allowed; }
         #revealButton:enabled { background-color: #1e90ff; cursor: pointer; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>🍫 Chocoloco Randomizer 🍫</h1>
+    <h1>🍫 Chocoloco Name Shuffle 🍫</h1>
     <input type="text" id="nameInput" placeholder="Namen eingeben" onkeydown="handleKeyPress(event)">
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
     <button onclick="shuffleNames()">Namen mischen</button>
     <button onclick="revealNextName()" disabled id="revealButton">Namen aufdecken (0/0)</button>
     <ul id="shuffledList"></ul>
-    <audio id="drumroll" src="https://www.fesliyanstudios.com/play-mp3/342"></audio>
+    <audio id="drumroll" src="https://www.fesliyanstudios.com/play-mp3/4396"></audio>
 
     <script>
         let names = [];
@@ -76,7 +77,7 @@
                 setTimeout(() => {
                     let list = document.getElementById("shuffledList");
                     let li = document.createElement("li");
-                    li.textContent = shuffledNames[currentIndex];
+                    li.textContent = `${currentIndex + 1}. ${shuffledNames[currentIndex]}`;
                     list.appendChild(li);
                     currentIndex++;
                     let revealButton = document.getElementById("revealButton");
