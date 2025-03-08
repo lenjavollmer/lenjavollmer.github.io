@@ -7,7 +7,8 @@
     <style>
         body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding-top: 50px; text-align: center; }
         h1 { color: #4e2607; font-size: 2.8em; font-family: 'Lobster', cursive; text-shadow: 4px 4px #a0522d; }
-        ul { padding-left: 20px; text-align: left; }
+        ul { padding-left: 0; list-style-type: none; text-align: left; }
+        li { padding-left: 10px; }
         button, input { display: block; width: 100%; margin-top: 10px; padding: 10px; box-sizing: border-box; border: none; font-weight: bold; }
         input { border: 2px solid #5c3317; padding: 8px; }
         button:nth-of-type(1) { background-color: #32cd32; color: white; }
@@ -20,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>🍫 Chocoloco Name Shuffle 🍫</h1>
+    <h1>Chocoloco Randomizer</h1>
     <input type="text" id="nameInput" placeholder="Namen eingeben" onkeydown="handleKeyPress(event)">
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
@@ -77,7 +78,7 @@
                 setTimeout(() => {
                     let list = document.getElementById("shuffledList");
                     let li = document.createElement("li");
-                    li.textContent = `${currentIndex + 1}. ${shuffledNames[currentIndex]}`;
+                    li.textContent = shuffledNames[currentIndex];
                     list.appendChild(li);
                     currentIndex++;
                     let revealButton = document.getElementById("revealButton");
