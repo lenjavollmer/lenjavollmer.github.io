@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <input type="text" id="nameInput" placeholder="Namen eingeben">
+    <input type="text" id="nameInput" placeholder="Namen eingeben" onkeydown="handleKeyPress(event)">
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
     <button onclick="shuffleNames()">Namen mischen</button>
@@ -30,6 +30,12 @@
                 names.push(name);
                 input.value = "";
                 updateList();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                addName();
             }
         }
 
