@@ -50,6 +50,7 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
 </head>
 <body>
     <h1>Chocoloco Randomizer</h1>
@@ -104,6 +105,14 @@
 
         function revealNextName() {
             if (currentIndex < shuffledNames.length) {
+                // Konfetti-Explosion starten
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { x: 0.5, y: 0.5 }, // Explosion in der Mitte des Bildschirms
+                    colors: ['#ff0000', '#ffff00', '#00ff00', '#0000ff', '#ff00ff']
+                });
+
                 // Unverzögertes Erscheinen des Namens
                 let nameElement = document.createElement("div");
                 nameElement.classList.add("name-reveal");
