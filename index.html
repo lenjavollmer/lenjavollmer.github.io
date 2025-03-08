@@ -25,6 +25,7 @@
     <button onclick="shuffleNames()">Namen mischen</button>
     <button onclick="revealNextName()" disabled id="revealButton">Namen aufdecken</button>
     <ul id="shuffledList"></ul>
+    <audio id="drumroll" src="https://www.fesliyanstudios.com/play-mp3/4387"></audio>
 
     <script>
         let names = [];
@@ -69,17 +70,20 @@
 
         function revealNextName() {
             if (currentIndex < shuffledNames.length) {
-                let list = document.getElementById("shuffledList");
-                let li = document.createElement("li");
-                li.textContent = shuffledNames[currentIndex];
-                list.appendChild(li);
-                currentIndex++;
-                if (currentIndex >= shuffledNames.length) {
-                    let revealButton = document.getElementById("revealButton");
-                    revealButton.disabled = true;
-                    revealButton.style.backgroundColor = "#d3d3d3";
-                    revealButton.style.cursor = "not-allowed";
-                }
+                document.getElementById("drumroll").play();
+                setTimeout(() => {
+                    let list = document.getElementById("shuffledList");
+                    let li = document.createElement("li");
+                    li.textContent = shuffledNames[currentIndex];
+                    list.appendChild(li);
+                    currentIndex++;
+                    if (currentIndex >= shuffledNames.length) {
+                        let revealButton = document.getElementById("revealButton");
+                        revealButton.disabled = true;
+                        revealButton.style.backgroundColor = "#d3d3d3";
+                        revealButton.style.cursor = "not-allowed";
+                    }
+                }, 1500); // Verzögerung für den Trommelwirbel
             }
         }
     </script>
