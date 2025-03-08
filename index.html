@@ -1,7 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namen Mischen</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; }
+        ul { padding-left: 20px; }
+        button { display: block; width: 100%; margin-top: 10px; padding: 10px; }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <input type="text" id="nameInput" placeholder="Namen eingeben">
+    <button onclick="addName()">Namen hinzufügen</button>
+    <ul id="nameList"></ul>
+    <button onclick="shuffleNames()">Namen mischen</button>
+    <ul id="shuffledList"></ul>
+
+    <script>
+        let names = [];
+
+        function addName() {
+            let input = document.getElementById("nameInput");
+            let name = input.value.trim();
+            if (name) {
+                names.push(name);
+                input.value = "";
+                updateList();
+            }
+        }
+
+        function updateList() {
+            let list = document.getElementById("nameList");
+            list.innerHTML = "";
+            names.forEach(n => {
+                let li = document.createElement("li");
+                li.textContent = n;
+                list.appendChild(li);
+            });
+        }
+
+        function shuffleNames() {
+            let shuffled = [...names].sort(() => Math.random() - 0.5);
+            let list = document.getElementById("shuffledList");
+            list.innerHTML = "";
+            shuffled.forEach(n => {
+                let li = document.createElement("li");
+                li.textContent = n;
+                list.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
