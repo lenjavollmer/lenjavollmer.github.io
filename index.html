@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Namen Mischen</title>
+    <title>Chocoloco Randomizer</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding-top: 50px; }
-        ul { padding-left: 20px; }
-        button, input { display: block; width: 100%; margin-top: 10px; padding: 10px; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: auto; padding-top: 50px; text-align: center; }
+        h1 { color: #d63384; }
+        ul { padding-left: 20px; text-align: left; }
+        button, input { display: block; width: 100%; margin-top: 10px; padding: 10px; box-sizing: border-box; border: none; font-weight: bold; }
+        button:nth-of-type(1) { background-color: #ff69b4; color: white; }
+        button:nth-of-type(2) { background-color: #32cd32; color: white; }
+        button:nth-of-type(3) { background-color: #ffa500; color: white; }
+        button:hover { opacity: 0.8; cursor: pointer; }
     </style>
 </head>
 <body>
+    <h1>Chocoloco Randomizer</h1>
     <input type="text" id="nameInput" placeholder="Namen eingeben" onkeydown="handleKeyPress(event)">
     <button onclick="addName()">Namen hinzufügen</button>
     <ul id="nameList"></ul>
