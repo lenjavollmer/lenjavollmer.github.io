@@ -1,9 +1,8 @@
 import {
-  HUB_SLOT,
   createFourState,
   applyFourSelection,
   findGroup,
-  placeBoard,
+  shuffleAll,
   shareFour,
 } from "./logic.mjs";
 import { HUB, BOARD_WORDS, CATEGORIES, HUB_SUMMARY } from "../data/four.js";
@@ -25,12 +24,12 @@ export function mountFour(root, { onHome }) {
   finale.hidden = true;
 
   root.append(
-    topbar("Four by Three", onHome),
+    topbar("3 times 4", onHome),
     el("section", { class: "panel" }, [
-      el("h1", { text: "Four by Three" }),
+      el("h1", { text: "3 times 4" }),
       el("p", {
         class: "lede",
-        text: "Wähle genau drei Kacheln. Eine richtige Gruppe enthält die Mitte und zwei Wörter, die nur dorthin gehören.",
+        text: "Wähle genau drei Kacheln und schick sie ab.",
       }),
       solvedHost,
       board,
@@ -63,25 +62,16 @@ export function mountFour(root, { onHome }) {
   }
 
   function paintBoard() {
-    const cells = placeBoard(state.peripheral, HUB);
     board.replaceChildren();
-    cells.forEach((word, index) => {
-      if (!word) {
-        const gap = el("div", { class: "word-gap", attrs: { "aria-hidden": "true" } });
-        board.append(gap);
-        return;
-      }
+    state.tiles.forEach((word) => {
       const pressed = selected.includes(word);
       const button = el("button", {
-        class: word === HUB ? "word-tile is-hub" : "word-tile",
+        class: pressed ? "word-tile is-selected" : "word-tile",
         attrs: { type: "button", "aria-pressed": pressed ? "true" : "false" },
       });
-      if (pressed) button.classList.add("is-selected");
       button.append(el("span", { class: "word-label", text: word }));
-      if (word === HUB) button.append(el("span", { class: "hub-tag", text: "Mitte" }));
       if (pressed) button.append(el("span", { class: "picked-tag", text: "gewählt" }));
       button.addEventListener("click", () => toggle(word));
-      if (index === HUB_SLOT) button.classList.add("is-center");
       board.append(button);
     });
     send.disabled = selected.length !== 3 || state.status !== "playing";
@@ -151,15 +141,9 @@ export function mountFour(root, { onHome }) {
   }
 
   function shuffleAgain() {
-    const next = state.peripheral.slice();
-    for (let i = next.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [next[i], next[j]] = [next[j], next[i]];
-    }
-    state = { ...state, peripheral: next };
+    state = { ...state, tiles: shuffleAll(state.tiles) };
     paintBoard();
-    say("Die Kacheln sind neu gemischt. Die Mitte bleibt in der Mitte.");
-    return next;
+    say("Die Kacheln sind neu gemischt.");
   }
 
   mix.addEventListener("click", () => {

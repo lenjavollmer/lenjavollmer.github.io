@@ -4,7 +4,6 @@ import { WORDS } from "../data/words.js";
 import { CATEGORIES, HUB, BOARD_WORDS } from "../data/four.js";
 import { framedRound } from "../data/framed.js";
 import {
-  HUB_SLOT,
   scoreGuess,
   keyboardFromRows,
   createWordleState,
@@ -15,7 +14,7 @@ import {
   submitFramed,
   findGroup,
   wordsAfterSolves,
-  placeBoard,
+  shuffleAll,
   applyFourSelection,
   createFourState,
   shareWordle,
@@ -84,6 +83,14 @@ test("Framed wechselt Bilder, ueberspringt und akzeptiert Schreibweisen", () => 
   step = submitFramed(step.state, "   ", aliases);
   assert.equal(step.kind, "skip");
   assert.equal(step.state.imageIndex, 2);
+  const teased = submitFramed(createFramedState(5), "Godzilla 30", aliases);
+  assert.equal(teased.kind, "tease");
+  assert.equal(teased.state.imageIndex, 0);
+  assert.equal(teased.state.attemptsUsed, 0);
+  assert.equal(teased.state.status, "playing");
+  assert.equal(submitFramed(teased.state, "godzilla30", aliases).kind, "tease");
+  assert.equal(submitFramed(teased.state, "Godzilla Minus One", aliases).kind, "win");
+
   step = submitFramed(step.state, "Godzilla: Minus One", aliases);
   assert.equal(step.state.status, "won");
   assert.equal(step.state.solvedOn, 3);
@@ -106,7 +113,7 @@ test("Four by Three erkennt die vier Gruppen und laesst Fehler im Brett", () => 
   assert.equal(findGroup(["NIS", "SCREAM", "DORA"], CATEGORIES, HUB), null);
 
   const wrong = applyFourSelection(
-    { peripheral: [], solved: [], mistakes: 0, status: "playing" },
+    { tiles: BOARD_WORDS.slice(), solved: [], mistakes: 0, status: "playing" },
     ["SCREAM", "TAMAGOTCHI", "DORA"],
     CATEGORIES,
     HUB,
@@ -122,18 +129,20 @@ test("Four by Three erkennt die vier Gruppen und laesst Fehler im Brett", () => 
   assert.equal(afterYear.includes("TAMAGOTCHI"), false);
   assert.equal(afterYear.includes("DORA"), true);
 
-  const cells = placeBoard(afterYear.filter((word) => word !== HUB), HUB);
-  assert.equal(cells[HUB_SLOT], HUB);
-  assert.equal(cells.filter((word) => word === HUB).length, 1);
+  const mixed = shuffleAll(BOARD_WORDS, () => 0);
+  assert.equal(mixed.length, 9);
+  assert.equal(mixed.filter((word) => word === HUB).length, 1);
+  assert.notEqual(mixed.indexOf(HUB), 4);
 
-  let state = createFourState(BOARD_WORDS, HUB);
+  let state = createFourState(BOARD_WORDS);
   for (const category of CATEGORIES) {
     state = applyFourSelection(state, [HUB, ...category.words], CATEGORIES, HUB, BOARD_WORDS);
   }
   assert.equal(state.status, "won");
   assert.equal(state.solved.length, 4);
   assert.equal(shareFour(2).includes("NIS"), false);
-  assert.equal(shareFour(0), "Four by Three: gelöst ohne Fehlversuch");
+  assert.equal(state.tiles.filter((word) => word === HUB).length, 1);
+  assert.equal(shareFour(0), "3 times 4: gelöst ohne Fehlversuch");
 });
 
 test("Rueckkehr zur Spielauswahl setzt die Ansicht zurueck", () => {

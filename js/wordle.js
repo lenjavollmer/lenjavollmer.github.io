@@ -58,7 +58,7 @@ export function mountWordle(root, { onHome, words }) {
     topbar("Wordle", onHome),
     el("section", { class: "panel" }, [
       el("h1", { text: "Wordle" }),
-      el("p", { class: "lede", text: "Fünf englische Buchstaben, sechs Versuche." }),
+      el("p", { class: "lede", text: "Das Rätsel ist auf Englisch. Fünf Buchstaben, sechs Versuche." }),
       grid,
       legend,
       result,

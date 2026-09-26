@@ -101,7 +101,8 @@ export function mountFramed(root, { onHome, round }) {
     state = outcome.state;
     input.value = "";
     paint();
-    if (outcome.kind === "win") say(`Erkannt auf Bild ${state.solvedOn} von ${state.total}.`);
+    if (outcome.kind === "tease") say("Jawoll, das stimmt, aber weißt du auch, wie er heißt?");
+    else if (outcome.kind === "win") say(`Erkannt auf Bild ${state.solvedOn} von ${state.total}.`);
     else if (outcome.kind === "loss") say(`Nicht erkannt. Der Film ist ${round.aliases[0]}.`);
     else if (outcome.kind === "skip") say(`Übersprungen. Bild ${state.imageIndex + 1} von ${state.total}.`);
     else say(`Nicht erkannt. Bild ${state.imageIndex + 1} von ${state.total}.`);

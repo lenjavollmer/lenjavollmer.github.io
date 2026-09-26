@@ -29,6 +29,41 @@ body {
     var(--wash);
 }
 
+.festive {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.thirty {
+  position: absolute;
+  color: rgba(124, 47, 54, 0.22);
+  font-family: "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  opacity: 0.85;
+  animation: confetti-fall linear infinite;
+}
+
+.tone-0 { background: #7c2f36; }
+.tone-1 { background: #c9842a; }
+.tone-2 { background: #1e5c45; }
+.tone-3 { background: #e7b2a4; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-8vh) rotate(0deg); }
+  100% { transform: translateY(108vh) rotate(280deg); }
+}
+
 .skip {
   position: absolute;
   left: 12px;
@@ -44,6 +79,8 @@ body {
 .skip:focus { transform: none; }
 
 #app {
+  position: relative;
+  z-index: 1;
   width: min(1040px, calc(100% - 28px));
   margin: 0 auto;
   padding: 28px 0 48px;

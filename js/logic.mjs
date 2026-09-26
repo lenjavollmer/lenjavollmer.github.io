@@ -3,8 +3,6 @@ export const WORDLE_ROWS = 6;
 export const TARGET = "SCOUT";
 
 const RANK = { absent: 1, present: 2, correct: 3 };
-const PERIPHERAL_SLOTS = [0, 1, 2, 3, 5, 6, 7, 8];
-export const HUB_SLOT = 4;
 
 export function scoreGuess(guess, target = TARGET) {
   const g = guess.toUpperCase();
@@ -88,6 +86,10 @@ export function answerMatches(input, aliases) {
   return aliases.some((alias) => normalizeAnswer(alias) === normalized);
 }
 
+export function isThirtyTease(input) {
+  return normalizeAnswer(input).replace(/\s+/g, "") === "godzilla30";
+}
+
 export function createFramedState(imageCount) {
   return {
     imageIndex: 0,
@@ -100,6 +102,7 @@ export function createFramedState(imageCount) {
 
 export function submitFramed(state, rawInput, aliases) {
   if (state.status !== "playing") return { state, kind: "locked" };
+  if (isThirtyTease(rawInput)) return { state, kind: "tease" };
   const attempt = state.imageIndex + 1;
   if (answerMatches(rawInput, aliases)) {
     return {
@@ -142,8 +145,8 @@ export function wordsAfterSolves(boardWords, solvedIds, categories, hub) {
   return boardWords.filter((word) => word === hub || !removed.has(word));
 }
 
-export function shufflePeripheral(words, hub, random = Math.random) {
-  const copy = words.filter((word) => word !== hub);
+export function shuffleAll(words, random = Math.random) {
+  const copy = words.slice();
   for (let i = copy.length - 1; i > 0; i -= 1) {
     const j = Math.floor(random() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
@@ -151,19 +154,9 @@ export function shufflePeripheral(words, hub, random = Math.random) {
   return copy;
 }
 
-export function placeBoard(peripheral, hub) {
-  const cells = Array(9).fill(null);
-  cells[HUB_SLOT] = hub;
-  peripheral.forEach((word, index) => {
-    const slot = PERIPHERAL_SLOTS[index];
-    if (slot !== undefined) cells[slot] = word;
-  });
-  return cells;
-}
-
-export function createFourState(words, hub) {
+export function createFourState(words) {
   return {
-    peripheral: shufflePeripheral(words, hub),
+    tiles: shuffleAll(words),
     solved: [],
     mistakes: 0,
     status: "playing",
@@ -179,7 +172,7 @@ export function applyFourSelection(state, selected, categories, hub, boardWords)
   const remaining = wordsAfterSolves(boardWords, solved, categories, hub);
   const done = solved.length === categories.length;
   return {
-    peripheral: shufflePeripheral(remaining, hub),
+    tiles: shuffleAll(remaining),
     solved,
     mistakes: state.mistakes,
     status: done ? "won" : "playing",
@@ -199,9 +192,9 @@ export function shareFramed(state) {
 }
 
 export function shareFour(mistakes) {
-  if (mistakes === 0) return "Four by Three: gelöst ohne Fehlversuch";
+  if (mistakes === 0) return "3 times 4: gelöst ohne Fehlversuch";
   const label = mistakes === 1 ? "Fehlversuch" : "Fehlversuchen";
-  return `Four by Three: gelöst mit ${mistakes} ${label}`;
+  return `3 times 4: gelöst mit ${mistakes} ${label}`;
 }
 
 export function createSession() {
