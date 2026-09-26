@@ -9,21 +9,57 @@ const app = document.querySelector("#app");
 const festive = document.querySelector("#festive");
 let dispose = () => {};
 
-for (let i = 0; i < 42; i += 1) {
-  const thirty = el("span", { class: "thirty", text: "30" });
-  thirty.style.left = `${(i * 17) % 100}%`;
-  thirty.style.top = `${(i * 23) % 100}%`;
-  thirty.style.fontSize = `${0.75 + (i % 5) * 0.18}rem`;
-  thirty.style.transform = `rotate(${(i % 9) * 8 - 28}deg)`;
-  festive.append(thirty);
-}
-for (let i = 0; i < 18; i += 1) {
-  const bit = el("span", { class: `confetti tone-${i % 4}` });
-  bit.style.left = `${(i * 19 + 4) % 100}%`;
-  bit.style.top = `${(i * 13) % 92}%`;
-  bit.style.animationDelay = `${(i % 8) * 0.45}s`;
-  bit.style.animationDuration = `${7 + (i % 5)}s`;
+const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function piece(x, y, kind) {
+  const bit = el("span", { class: `confetti ${kind} tone-${Math.floor(Math.random() * 4)}` });
+  const angle = Math.random() * Math.PI * 2;
+  const dist = 24 + Math.random() * 150;
+  bit.style.left = `${x}%`;
+  bit.style.top = `${y}%`;
+  bit.style.setProperty("--dx", `${Math.cos(angle) * dist}px`);
+  bit.style.setProperty("--dy", `${Math.sin(angle) * dist - 36}px`);
+  bit.style.setProperty("--spin", `${Math.random() * 520 - 260}deg`);
+  bit.style.setProperty("--life", `${1.5 + Math.random() * 1.6}s`);
   festive.append(bit);
+  window.setTimeout(() => bit.remove(), 3400);
+}
+
+function burst() {
+  const count = 6 + Math.floor(Math.random() * 42);
+  const x = 6 + Math.random() * 88;
+  const y = 8 + Math.random() * 62;
+  for (let i = 0; i < count; i += 1) piece(x, y, Math.random() < 0.25 ? "round" : "strip");
+}
+
+function drizzle() {
+  const count = Math.random() < 0.35 ? 0 : 1 + Math.floor(Math.random() * 7);
+  for (let i = 0; i < count; i += 1) {
+    const bit = el("span", { class: `confetti drift tone-${Math.floor(Math.random() * 4)}` });
+    bit.style.left = `${Math.random() * 100}%`;
+    bit.style.top = "-4%";
+    bit.style.setProperty("--dx", `${Math.random() * 80 - 40}px`);
+    bit.style.setProperty("--spin", `${Math.random() * 360}deg`);
+    bit.style.setProperty("--life", `${5 + Math.random() * 4}s`);
+    festive.append(bit);
+    window.setTimeout(() => bit.remove(), 9500);
+  }
+}
+
+function scheduleBursts() {
+  const wait = 350 + Math.random() * 2400;
+  window.setTimeout(() => {
+    const waves = Math.random() < 0.4 ? 2 + Math.floor(Math.random() * 2) : 1;
+    for (let wave = 0; wave < waves; wave += 1) window.setTimeout(burst, wave * (90 + Math.random() * 160));
+    scheduleBursts();
+  }, wait);
+}
+
+if (motionOk && festive) {
+  drizzle();
+  burst();
+  scheduleBursts();
+  window.setInterval(drizzle, 700);
 }
 
 const titles = {

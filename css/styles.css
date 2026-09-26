@@ -37,31 +37,40 @@ body {
   pointer-events: none;
 }
 
-.thirty {
-  position: absolute;
-  color: rgba(124, 47, 54, 0.22);
-  font-family: "Palatino Linotype", Palatino, Georgia, serif;
-  font-weight: 700;
-  line-height: 1;
-}
-
 .confetti {
   position: absolute;
-  width: 8px;
+  width: 6px;
   height: 12px;
-  border-radius: 2px;
-  opacity: 0.85;
-  animation: confetti-fall linear infinite;
+  border-radius: 1px;
+  opacity: 0;
+  animation: burst var(--life, 2s) ease-out forwards;
+}
+
+.confetti.round {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.confetti.drift {
+  animation-name: drift;
+  animation-timing-function: linear;
 }
 
 .tone-0 { background: #7c2f36; }
 .tone-1 { background: #c9842a; }
 .tone-2 { background: #1e5c45; }
-.tone-3 { background: #e7b2a4; }
+.tone-3 { background: #f0d2a8; }
 
-@keyframes confetti-fall {
-  0% { transform: translateY(-8vh) rotate(0deg); }
-  100% { transform: translateY(108vh) rotate(280deg); }
+@keyframes burst {
+  0% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0deg) scale(0.5); }
+  20% { opacity: 1; transform: translate3d(var(--dx), var(--dy), 0) rotate(var(--spin)) scale(1); }
+  100% { opacity: 0; transform: translate3d(calc(var(--dx) * 0.3), calc(var(--dy) + 46vh), 0) rotate(calc(var(--spin) * 1.7)); }
+}
+
+@keyframes drift {
+  0% { opacity: 0.9; transform: translate3d(0, 0, 0) rotate(0deg); }
+  100% { opacity: 0.15; transform: translate3d(var(--dx), 108vh, 0) rotate(var(--spin)); }
 }
 
 .skip {
