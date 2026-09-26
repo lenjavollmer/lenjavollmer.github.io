@@ -36,7 +36,7 @@ export const CATEGORIES = [
     name: "EU-Regelwerke zu Cyber- und Digitalresilienz",
     words: ["DORA", "CRA"],
     explanation:
-      "NIS, DORA und CRA sind EU-Rechtsakte beziehungsweise Regelwerke im Bereich Cyber- und Digitalresilienz. DORA und CRA sind Verordnungen.",
+      "NIS, DORA und CRA sind EU-Rechtsakte beziehungsweise Regelwerke im Bereich Cyber- und Digitalresilienz.",
   },
 ];
 
@@ -45,5 +45,5 @@ export const HUB_SUMMARY = [
   "Zusammen mit Scream und Tamagotchi bildet es die Gruppe „Rausgekommen im Jahr 1996“.",
   "NIS bedeutet im Albanischen „beginnen“, „anfangen“ oder „losgehen“. Dazu passen Commencer und Beginnen.",
   "NIS wird rückwärts zu SIN, plus N ergibt SINN. EBEN wird rückwärts zu NEBE, plus N ergibt NEBEN. HI wird rückwärts zu IH, plus N ergibt IHN.",
-  "NIS, DORA und CRA sind EU-Rechtsakte beziehungsweise Regelwerke im Bereich Cyber- und Digitalresilienz. DORA und CRA sind Verordnungen.",
+  "NIS, DORA und CRA sind EU-Rechtsakte beziehungsweise Regelwerke im Bereich Cyber- und Digitalresilienz.",
 ];

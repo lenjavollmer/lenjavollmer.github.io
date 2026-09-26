@@ -5,7 +5,7 @@ import {
   shuffleAll,
   shareFour,
 } from "./logic.mjs";
-import { HUB, BOARD_WORDS, CATEGORIES, HUB_SUMMARY } from "../data/four.js";
+import { HUB, BOARD_WORDS, CATEGORIES, HUB_SUMMARY } from "../data/four.js?v=5";
 import { el, prefersReducedMotion, topbar, copyText, shareBox } from "./ui.js";
 
 export function mountFour(root, { onHome }) {
@@ -51,7 +51,7 @@ export function mountFour(root, { onHome }) {
     solvedHost.replaceChildren();
     state.solved.forEach((id, index) => {
       const category = categoryById(id);
-      const card = el("article", { class: "solved-card" }, [
+      const card = el("article", { class: `solved-card solved-${category.id}` }, [
         el("h2", { text: category.name }),
         el("p", { class: "solved-words", text: [HUB, ...category.words].join(" · ") }),
       ]);
