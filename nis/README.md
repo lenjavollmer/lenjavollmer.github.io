@@ -1,8 +1,6 @@
-# Drei Rätsel zum 28.
+# Drei Rätsel zum 30.
 
-Kleine statische Rätsel-Seite für den Geburtstagsmorgen: Wordle, Framed und 3 times 4. Ein Neuladen zeigt wieder die Spielauswahl. Spielstände bleiben nur im Arbeitsspeicher des offenen Tabs und werden nicht gespeichert. Die Seite setzt keine Cookies, kein localStorage und kein Tracking ein.
-
-Die Ausgabe für Maschas 28. Geburtstag liegt im Projektstamm und erscheint unter <https://lenjavollmer.github.io/>. Die Ausgabe für Nis’ 30. Geburtstag liegt unverändert im Ordner `nis/` und bleibt unter <https://lenjavollmer.github.io/nis/> erreichbar. Zum Zurückwechseln die Dateien aus `nis/` (ohne den Ordner `yuna/`) wieder in den Projektstamm kopieren. `nis/` selbst nicht mehr bearbeiten.
+Kleine statische Rätsel-Seite für den Geburtstagsmorgen: Wordle, Framed und Four by Three. Ein Neuladen zeigt wieder die Spielauswahl. Spielstände bleiben nur im Arbeitsspeicher des offenen Tabs und werden nicht gespeichert. Die Seite setzt keine Cookies, kein localStorage und kein Tracking ein.
 
 GitHub Pages protokolliert beim Aufruf selbst technische Zugriffsdaten, zum Beispiel IP-Adressen, aus Sicherheitsgründen. Die Rätsel-Inhalte liegen im Repository und sind im Seitenquelltext einsehbar.
 

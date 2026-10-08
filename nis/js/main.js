@@ -97,7 +97,7 @@ function renderHome() {
       el("h1", { text: "Geburtstadles" }),
       el("p", {
         class: "lede",
-        text: "Drei kleine Geburtstagsrätsel zu Maschas 28. Geburtstag",
+        text: "Drei kleine Geburtstagsrätsel zu Nis 30. Geburtstag",
       }),
       el("div", { class: "choices" }, [
         choice("Spiel 1", "Wordle", "Auf Englisch. Sechs Versuche, fünf Buchstaben.", "wordle"),
