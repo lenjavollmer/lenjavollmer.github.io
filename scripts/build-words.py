@@ -7,11 +7,16 @@ SOURCE = ROOT / "data" / "words.txt"
 TARGET = ROOT / "data" / "words.js"
 
 
+def upper_de(word: str) -> str:
+    return "".join("ß" if char in {"ß", "ẞ"} else char.upper() for char in word)
+
+
 def main() -> None:
-    words = sorted({line.strip().upper() for line in SOURCE.read_text(encoding="utf-8").splitlines() if line.strip()})
-    if "SCOUT" not in words:
-        raise SystemExit("SCOUT fehlt in data/words.txt")
-    bad = [word for word in words if len(word) != 5 or not word.isalpha()]
+    words = sorted({upper_de(line.strip()) for line in SOURCE.read_text(encoding="utf-8").splitlines() if line.strip()})
+    if "KAFFE" not in words:
+        raise SystemExit("KAFFE fehlt in data/words.txt")
+    allowed = set("ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜß")
+    bad = [word for word in words if len(word) != 5 or any(letter not in allowed for letter in word)]
     if bad:
         raise SystemExit(f"Ungueltige Eintraege: {bad[:5]}")
     body = ",\n".join(f'  "{word}"' for word in words)
@@ -19,12 +24,13 @@ def main() -> None:
         "\n".join(
             [
                 "/**",
-                " * Begrenzte lokale Liste englischer Fuenf-Buchstaben-Woerter.",
-                " * Quelle: Donald Knuth, Stanford GraphBase (sgb-words), 5757 Woerter.",
+                " * Begrenzte lokale Liste deutscher Woerter mit fuenf Buchstaben.",
+                " * Quellen: wordle-helper/words (Apache-2.0), caco3/wordle-de (MIT;",
+                " * Wikipedia-Wortliste und OpenThesaurus). KAFFE ist ergaenzt.",
                 " * Kein vollstaendiges Woerterbuch. Austauschdatei: data/words.txt",
                 " * Neu erzeugen: python scripts/build-words.py",
                 " */",
-                'export const WORD_LIST_KIND = "limited-sgb";',
+                'export const WORD_LIST_KIND = "limited-de";',
                 "export const WORDS = new Set([",
                 body,
                 "]);",

@@ -1,4 +1,4 @@
-import { createFramedState, submitFramed, shareFramed } from "./logic.mjs?v=7";
+import { createFramedState, submitFramed, shareFramed } from "./logic.mjs?v=8";
 import { el, copyText, topbar, shareBox } from "./ui.js";
 
 export function mountFramed(root, { onHome, round }) {

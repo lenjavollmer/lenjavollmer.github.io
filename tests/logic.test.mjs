@@ -43,8 +43,11 @@ test("Tastatur merkt sich den besten Status", () => {
 });
 
 test("Wordle: Sieg, Niederlage und unvollstaendige Eingabe", () => {
-  assert.equal(WORDS.has("SCOUT"), true);
-  assert.equal(WORDS.has("KAFFE"), false);
+  assert.equal(typeLetter(createWordleState(), "ä").current, "Ä");
+  assert.equal(WORDS.has("KAFFE"), true);
+  assert.equal(WORDS.has("STUHL"), true);
+  assert.equal(WORDS.has("WHICH"), false);
+  assert.equal(commitGuess({ ...createWordleState(), current: "WHICH" }, WORDS).error, "unknown");
   let state = createWordleState();
   for (const letter of "KAFF") state = typeLetter(state, letter);
   assert.equal(commitGuess(state, WORDS).error, "short");
@@ -56,7 +59,7 @@ test("Wordle: Sieg, Niederlage und unvollstaendige Eingabe", () => {
   assert.equal(shareWordle(won.state), "Wordle: gelöst in 1 von 6");
   assert.equal(shareWordle(won.state).includes("KAFFE"), false);
 
-  const wrongs = ["WHICH", "THERE", "THEIR", "ABOUT", "WOULD", "THESE"];
+  const wrongs = ["NACHT", "BLUME", "APFEL", "LICHT", "WOLKE", "HUNDE"];
   state = createWordleState();
   for (const word of wrongs) {
     let typed = state;

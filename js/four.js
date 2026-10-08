@@ -4,7 +4,7 @@ import {
   findGroup,
   shuffleAll,
   shareFour,
-} from "./logic.mjs?v=7";
+} from "./logic.mjs?v=8";
 import { HUB, BOARD_WORDS, CATEGORIES, HUB_SUMMARY } from "../data/four.js?v=7";
 import { el, prefersReducedMotion, topbar, copyText, shareBox } from "./ui.js";
 

@@ -4,9 +4,13 @@ export const TARGET = "KAFFE";
 
 const RANK = { absent: 1, present: 2, correct: 3 };
 
+export function upperGerman(value) {
+  return Array.from(String(value), (letter) => (letter === "ß" || letter === "ẞ" ? "ß" : letter.toLocaleUpperCase("de"))).join("");
+}
+
 export function scoreGuess(guess, target = TARGET) {
-  const g = guess.toUpperCase();
-  const t = target.toUpperCase();
+  const g = upperGerman(guess);
+  const t = upperGerman(target);
   if (g.length !== t.length) {
     throw new Error("Wortlaenge stimmt nicht.");
   }
@@ -51,8 +55,9 @@ export function createWordleState() {
 export function typeLetter(state, letter) {
   if (state.status !== "playing") return state;
   if (state.current.length >= WORDLE_LENGTH) return state;
-  if (!/^[A-Za-z]$/.test(letter)) return state;
-  return { ...state, current: state.current + letter.toUpperCase() };
+  const next = upperGerman(letter);
+  if (!/^[A-ZÄÖÜß]$/.test(next)) return state;
+  return { ...state, current: state.current + next };
 }
 
 export function deleteLetter(state) {
@@ -63,7 +68,7 @@ export function deleteLetter(state) {
 export function commitGuess(state, words, target = TARGET) {
   if (state.status !== "playing") return { state, error: "locked" };
   if (state.current.length !== WORDLE_LENGTH) return { state, error: "short" };
-  const solution = target.toUpperCase();
+  const solution = upperGerman(target);
   if (!words.has(state.current) && state.current !== solution) return { state, error: "unknown" };
   const guess = state.current;
   const guesses = [...state.guesses, { guess, marks: scoreGuess(guess, solution) }];

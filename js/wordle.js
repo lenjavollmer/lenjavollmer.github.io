@@ -8,10 +8,10 @@ import {
   commitGuess,
   keyboardFromRows,
   shareWordle,
-} from "./logic.mjs?v=7";
+} from "./logic.mjs?v=8";
 import { el, prefersReducedMotion, markGlyph, markLabel, copyText, topbar, shareBox } from "./ui.js";
 
-const KEY_ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+const KEY_ROWS = ["QWERTZUIOPÜ", "ASDFGHJKLÖÄ", "YXCVBNM"];
 
 export function mountWordle(root, { onHome, words }) {
   let state = createWordleState();
@@ -58,7 +58,7 @@ export function mountWordle(root, { onHome, words }) {
     topbar("Wordle", onHome),
     el("section", { class: "panel" }, [
       el("h1", { text: "Wordle" }),
-      el("p", { class: "lede", text: "Fünf Buchstaben, sechs Versuche." }),
+      el("p", { class: "lede", text: "Auf Deutsch. Fünf Buchstaben, sechs Versuche." }),
       grid,
       legend,
       result,
@@ -187,7 +187,7 @@ export function mountWordle(root, { onHome, words }) {
       rows[state.guesses.length].row.classList.remove("is-shaking");
       void rows[state.guesses.length].row.offsetWidth;
       rows[state.guesses.length].row.classList.add("is-shaking");
-      say("Das Wort steht nicht in der lokalen Wortliste.");
+      say("Das Wort steht nicht in der deutschen Wortliste.");
       return;
     }
     const rowIndex = state.guesses.length;
@@ -205,7 +205,7 @@ export function mountWordle(root, { onHome, words }) {
     } else if (event.key === "Backspace") {
       event.preventDefault();
       erase();
-    } else if (/^[a-zA-Z]$/.test(event.key)) {
+    } else if (/^[a-zA-ZäöüÄÖÜßẞ]$/.test(event.key)) {
       event.preventDefault();
       press(event.key);
     }

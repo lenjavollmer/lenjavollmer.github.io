@@ -44,7 +44,7 @@ Es werden nur die dort genannten Dateien geladen. Fehlt eine Datei, erscheint ei
 
 ## Wortliste
 
-`data/words.txt` und `data/words.js` enthalten 5757 englische Wörter mit fünf Buchstaben aus Donald Knuths Stanford GraphBase (`sgb-words`). Das ist eine begrenzte Liste, kein vollständiges englisches Wörterbuch. Manche gültigen englischen Wörter werden abgelehnt. `KAFFE` steht nicht in der Liste und wird als Lösung trotzdem angenommen.
+`data/words.txt` und `data/words.js` enthalten deutsche Wörter mit fünf Buchstaben. Quellen sind [wordle-helper/words](https://github.com/wordle-helper/words) (Apache-2.0) und [caco3/wordle-de](https://github.com/caco3/wordle-de) (MIT; Wikipedia-Wortliste und OpenThesaurus). Das ist keine vollständige Wörterbuchliste. `KAFFE` ist ergänzt. Englische Wörter, die nicht in dieser Liste stehen, werden abgelehnt.
 
 Nach einer Änderung an `data/words.txt`:
 
