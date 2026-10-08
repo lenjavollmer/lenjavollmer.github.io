@@ -1,4 +1,4 @@
-import { createFramedState, submitFramed, shareFramed } from "./logic.mjs";
+import { createFramedState, submitFramed, shareFramed } from "./logic.mjs?v=7";
 import { el, copyText, topbar, shareBox } from "./ui.js";
 
 export function mountFramed(root, { onHome, round }) {
@@ -20,9 +20,8 @@ export function mountFramed(root, { onHome, round }) {
       autocomplete: "off",
       autocorrect: "off",
       spellcheck: "false",
-      "aria-label": "Filmtitel",
-      placeholder: "Filmtitel eingeben",
-      lang: "en",
+      "aria-label": "Serientitel",
+      placeholder: "Serientitel eingeben",
     },
   });
   const guess = el("button", { class: "primary", text: "Raten", attrs: { type: "submit" } });
@@ -40,7 +39,7 @@ export function mountFramed(root, { onHome, round }) {
     topbar("Framed", onHome),
     el("section", { class: "panel" }, [
       el("h1", { text: "Framed" }),
-      el("p", { class: "lede", text: "Ein Filmtitel. Mit jedem Fehlversuch oder Überspringen kommt ein weiteres Bild." }),
+      el("p", { class: "lede", text: "Ein Serientitel. Mit jedem Fehlversuch oder Überspringen kommt ein weiteres Bild." }),
       counter,
       steps,
       el("div", { class: "shot-wrap" }, [shot, missing]),
@@ -91,7 +90,7 @@ export function mountFramed(root, { onHome, round }) {
     } else if (state.status === "lost") {
       result.hidden = false;
       result.querySelector(".result-title").textContent = "Aufgelöst";
-      result.querySelector(".result-copy").textContent = `Der Film ist ${round.aliases[0]}.`;
+      result.querySelector(".result-copy").textContent = `Die Serie ist ${round.aliases[0]}.`;
     }
   }
 
@@ -101,9 +100,8 @@ export function mountFramed(root, { onHome, round }) {
     state = outcome.state;
     input.value = "";
     paint();
-    if (outcome.kind === "tease") say("Jawoll, das stimmt, aber weißt du auch, wie er heißt?");
-    else if (outcome.kind === "win") say(`Erkannt auf Bild ${state.solvedOn} von ${state.total}.`);
-    else if (outcome.kind === "loss") say(`Nicht erkannt. Der Film ist ${round.aliases[0]}.`);
+    if (outcome.kind === "win") say(`Erkannt auf Bild ${state.solvedOn} von ${state.total}.`);
+    else if (outcome.kind === "loss") say(`Nicht erkannt. Die Serie ist ${round.aliases[0]}.`);
     else if (outcome.kind === "skip") say(`Übersprungen. Bild ${state.imageIndex + 1} von ${state.total}.`);
     else say(`Nicht erkannt. Bild ${state.imageIndex + 1} von ${state.total}.`);
   }

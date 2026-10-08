@@ -1,8 +1,8 @@
 import { WORDS } from "../data/words.js";
-import { framedRound } from "../data/framed.js";
-import { mountWordle } from "./wordle.js";
-import { mountFramed } from "./framed.js";
-import { mountFour } from "./four.js?v=5";
+import { framedRound } from "../data/framed.js?v=7";
+import { mountWordle } from "./wordle.js?v=7";
+import { mountFramed } from "./framed.js?v=7";
+import { mountFour } from "./four.js?v=7";
 import { el } from "./ui.js";
 
 const app = document.querySelector("#app");
@@ -100,8 +100,8 @@ function renderHome() {
         text: "Drei kleine Geburtstagsrätsel zu Maschas 28. Geburtstag",
       }),
       el("div", { class: "choices" }, [
-        choice("Spiel 1", "Wordle", "Auf Englisch. Sechs Versuche, fünf Buchstaben.", "wordle"),
-        choice("Spiel 2", "Framed", "Ein Film, Bild für Bild.", "framed"),
+        choice("Spiel 1", "Wordle", "Sechs Versuche, fünf Buchstaben.", "wordle"),
+        choice("Spiel 2", "Framed", "Eine Serie, Bild für Bild.", "framed"),
         choice("Spiel 3", "3 times 4", "Neun Wörter, vier Gruppen.", "four"),
       ]),
       el("p", {

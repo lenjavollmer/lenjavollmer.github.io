@@ -34,17 +34,17 @@ Pfade sind relativ, damit die Seite auch unter einem Projektpfad wie `username.g
 
 Die Reihenfolge steht in `data/framed.js`. Erwartete Dateien:
 
-1. `framed/01-uhrturm.jpg`
-2. `framed/02-mann-muetze.jpg`
-3. `framed/03-menge-flieht.jpg`
-4. `framed/04-godzilla-ruinen.jpg`
-5. `framed/05-godzilla-zug.jpg`
+1. `framed/01-band.webp`
+2. `framed/02-marktplatz.webp`
+3. `framed/03-haus.webp`
+4. `framed/04-anzug.webp`
+5. `framed/05-bett.jpg`
 
-Es werden nur die dort genannten Dateien geladen. Fehlt eine Datei, erscheint eine Fehlermeldung statt eines kaputten Bildsymbols. Akzeptierte Schreibweisen des Filmtitels stehen ebenfalls in `data/framed.js`.
+Es werden nur die dort genannten Dateien geladen. Fehlt eine Datei, erscheint eine Fehlermeldung statt eines kaputten Bildsymbols. Akzeptierte Schreibweisen des Serientitels stehen ebenfalls in `data/framed.js`. Die Bilder für Nis’ Ausgabe liegen in `nis/framed/`.
 
 ## Wortliste
 
-`data/words.txt` und `data/words.js` enthalten 5757 englische Wörter mit fünf Buchstaben aus Donald Knuths Stanford GraphBase (`sgb-words`). Das ist eine begrenzte Liste, kein vollständiges englisches Wörterbuch. Manche gültigen englischen Wörter werden abgelehnt. `SCOUT` ist enthalten.
+`data/words.txt` und `data/words.js` enthalten 5757 englische Wörter mit fünf Buchstaben aus Donald Knuths Stanford GraphBase (`sgb-words`). Das ist eine begrenzte Liste, kein vollständiges englisches Wörterbuch. Manche gültigen englischen Wörter werden abgelehnt. `KAFFE` steht nicht in der Liste und wird als Lösung trotzdem angenommen.
 
 Nach einer Änderung an `data/words.txt`:
 

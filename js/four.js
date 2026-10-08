@@ -4,8 +4,8 @@ import {
   findGroup,
   shuffleAll,
   shareFour,
-} from "./logic.mjs";
-import { HUB, BOARD_WORDS, CATEGORIES, HUB_SUMMARY } from "../data/four.js?v=5";
+} from "./logic.mjs?v=7";
+import { HUB, BOARD_WORDS, CATEGORIES, HUB_SUMMARY } from "../data/four.js?v=7";
 import { el, prefersReducedMotion, topbar, copyText, shareBox } from "./ui.js";
 
 export function mountFour(root, { onHome }) {
@@ -94,7 +94,7 @@ export function mountFour(root, { onHome }) {
             ? "Alle vier Gruppen sind gefunden, ohne Fehlversuch."
             : `Alle vier Gruppen sind gefunden, mit ${state.mistakes} ${state.mistakes === 1 ? "Fehlversuch" : "Fehlversuchen"}.`,
       }),
-      el("h3", { text: "Warum NIS das Hub-Wort ist" }),
+      el("h3", { text: `Warum ${HUB} das Hub-Wort ist` }),
     );
     HUB_SUMMARY.forEach((line) => finale.append(el("p", { text: line })));
     finale.append(share.box);

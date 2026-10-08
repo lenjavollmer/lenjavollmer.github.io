@@ -1,6 +1,6 @@
 export const WORDLE_LENGTH = 5;
 export const WORDLE_ROWS = 6;
-export const TARGET = "SCOUT";
+export const TARGET = "KAFFE";
 
 const RANK = { absent: 1, present: 2, correct: 3 };
 
@@ -63,10 +63,11 @@ export function deleteLetter(state) {
 export function commitGuess(state, words, target = TARGET) {
   if (state.status !== "playing") return { state, error: "locked" };
   if (state.current.length !== WORDLE_LENGTH) return { state, error: "short" };
-  if (!words.has(state.current)) return { state, error: "unknown" };
+  const solution = target.toUpperCase();
+  if (!words.has(state.current) && state.current !== solution) return { state, error: "unknown" };
   const guess = state.current;
-  const guesses = [...state.guesses, { guess, marks: scoreGuess(guess, target) }];
-  const won = guess === target;
+  const guesses = [...state.guesses, { guess, marks: scoreGuess(guess, solution) }];
+  const won = guess === solution;
   const status = won ? "won" : guesses.length >= WORDLE_ROWS ? "lost" : "playing";
   return { error: null, state: { guesses, current: "", status } };
 }
@@ -86,10 +87,6 @@ export function answerMatches(input, aliases) {
   return aliases.some((alias) => normalizeAnswer(alias) === normalized);
 }
 
-export function isThirtyTease(input) {
-  return normalizeAnswer(input).replace(/\s+/g, "") === "godzilla30";
-}
-
 export function createFramedState(imageCount) {
   return {
     imageIndex: 0,
@@ -102,7 +99,6 @@ export function createFramedState(imageCount) {
 
 export function submitFramed(state, rawInput, aliases) {
   if (state.status !== "playing") return { state, kind: "locked" };
-  if (isThirtyTease(rawInput)) return { state, kind: "tease" };
   const attempt = state.imageIndex + 1;
   if (answerMatches(rawInput, aliases)) {
     return {

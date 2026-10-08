@@ -8,7 +8,7 @@ import {
   commitGuess,
   keyboardFromRows,
   shareWordle,
-} from "./logic.mjs";
+} from "./logic.mjs?v=7";
 import { el, prefersReducedMotion, markGlyph, markLabel, copyText, topbar, shareBox } from "./ui.js";
 
 const KEY_ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
@@ -21,7 +21,7 @@ export function mountWordle(root, { onHome, words }) {
   const live = el("p", { class: "live", attrs: { "aria-live": "polite" } });
   const grid = el("div", {
     class: "grid",
-    attrs: { role: "grid", "aria-label": "Worträtsel mit sechs Versuchen", lang: "en" },
+    attrs: { role: "grid", "aria-label": "Worträtsel mit sechs Versuchen", lang: "de" },
   });
   const rows = [];
   for (let r = 0; r < WORDLE_ROWS; r += 1) {
@@ -58,7 +58,7 @@ export function mountWordle(root, { onHome, words }) {
     topbar("Wordle", onHome),
     el("section", { class: "panel" }, [
       el("h1", { text: "Wordle" }),
-      el("p", { class: "lede", text: "Das Rätsel ist auf Englisch. Fünf Buchstaben, sechs Versuche." }),
+      el("p", { class: "lede", text: "Fünf Buchstaben, sechs Versuche." }),
       grid,
       legend,
       result,

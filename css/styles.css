@@ -384,9 +384,9 @@ button:disabled {
   gap: 4px;
 }
 .solved-year { background: #f6d5d2; border-color: #c47c78; }
-.solved-begin { background: #f8e6bc; border-color: #c29a4a; }
-.solved-reverse { background: #d5eadc; border-color: #6a9e7c; }
-.solved-eu { background: #d7e3f6; border-color: #7d96c6; }
+.solved-names { background: #f8e6bc; border-color: #c29a4a; }
+.solved-six { background: #d5eadc; border-color: #6a9e7c; }
+.solved-kids { background: #d7e3f6; border-color: #7d96c6; }
 .solved-words { font-weight: 750; }
 
 .is-flipping { animation: flip 420ms ease; }
