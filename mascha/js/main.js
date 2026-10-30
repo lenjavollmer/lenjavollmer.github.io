@@ -94,6 +94,7 @@ function choice(kicker, title, text, screen) {
 function renderHome() {
   app.append(
     el("main", { class: "home" }, [
+      el("a", { class: "overview-link", text: "Zur Übersicht", attrs: { href: "../" } }),
       el("h1", { text: "Geburtstadles" }),
       el("p", {
         class: "lede",

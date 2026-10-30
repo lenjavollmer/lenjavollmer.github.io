@@ -1,6 +1,6 @@
 /* Ersetzt den alten Yuna-Service-Worker an der Startadresse.
    Bestehende Installationen laden diese Datei beim nächsten Besuch,
-   leeren den Cache und melden sich ab, damit die Rätsel-Seite erscheint. */
+   leeren den Cache und melden sich ab. Die Übersicht registriert ihn nicht. */
 self.addEventListener("install", () => {
   self.skipWaiting();
 });

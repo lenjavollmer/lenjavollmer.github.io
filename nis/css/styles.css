@@ -161,6 +161,15 @@ p { margin: 0; }
 
 .footnote { color: var(--muted); font-size: 0.95rem; }
 
+.overview-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--berry);
+  font-weight: 700;
+  text-decoration: none;
+}
+.overview-link:hover { text-decoration: underline; }
+
 .topbar {
   display: flex;
   align-items: center;

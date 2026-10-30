@@ -1,8 +1,13 @@
-# Drei Rätsel zum 28.
+# Übersicht
 
-Kleine statische Rätsel-Seite für den Geburtstagsmorgen: Wordle, Framed und 3 times 4. Ein Neuladen zeigt wieder die Spielauswahl. Spielstände bleiben nur im Arbeitsspeicher des offenen Tabs und werden nicht gespeichert. Die Seite setzt keine Cookies, kein localStorage und kein Tracking ein.
+Die Startseite unter <https://lenjavollmer.github.io/> ist ein Menü. Die einzelnen Seiten liegen in eigenen Ordnern:
 
-Die Ausgabe für Maschas 28. Geburtstag liegt im Projektstamm und erscheint unter <https://lenjavollmer.github.io/>. Die Ausgabe für Nis’ 30. Geburtstag liegt unverändert im Ordner `nis/` und bleibt unter <https://lenjavollmer.github.io/nis/> erreichbar. Zum Zurückwechseln die Dateien aus `nis/` (ohne den Ordner `yuna/`) wieder in den Projektstamm kopieren. `nis/` selbst nicht mehr bearbeiten.
+- [Papa Garvin](https://lenjavollmer.github.io/garvin/) im Ordner `garvin/`
+- [Mascha](https://lenjavollmer.github.io/mascha/) im Ordner `mascha/`
+- [Nis](https://lenjavollmer.github.io/nis/) im Ordner `nis/`
+- [Yuna](https://lenjavollmer.github.io/yuna/) im Ordner `yuna/`
+
+Ein Neuladen einer Rätselseite zeigt wieder die Spielauswahl dieser Seite. Spielstände bleiben nur im Arbeitsspeicher des offenen Tabs und werden nicht gespeichert. Die Seiten setzen keine Cookies, kein localStorage und kein Tracking ein.
 
 GitHub Pages protokolliert beim Aufruf selbst technische Zugriffsdaten, zum Beispiel IP-Adressen, aus Sicherheitsgründen. Die Rätsel-Inhalte liegen im Repository und sind im Seitenquelltext einsehbar.
 
@@ -19,39 +24,15 @@ Module funktionieren nicht zuverlässig, wenn `index.html` direkt als Datei geö
 Tests:
 
 ```bash
-node --test tests/logic.test.mjs
+node --test mascha/tests/logic.test.mjs
+node --test garvin/tests/logic.test.mjs
+node --test nis/tests/logic.test.mjs
 ```
 
 ## GitHub Pages
 
-Das Repository `lenjavollmer.github.io` veröffentlicht den Branch `main` bereits unter <https://lenjavollmer.github.io/>. Nach dem Push der neuen Dateien erscheint die Rätsel-Auswahl an dieser Adresse. Eine weitere Pages-Einstellung ist nicht nötig.
+Das Repository `lenjavollmer.github.io` veröffentlicht den Branch `main` unter <https://lenjavollmer.github.io/>. Eine weitere Pages-Einstellung ist nicht nötig.
 
-Die bisherige Yuna-Seite liegt unverändert im Ordner `yuna/` und bleibt unter <https://lenjavollmer.github.io/yuna/> erreichbar. Wer die App früher auf dem Handy gespeichert hat, bekommt beim nächsten Besuch einmal den alten Cache geleert. Zurück zur Yuna-Startseite geht es über den Git-Stand `Yuna Marie-Monat Fix` auf `main`.
+`sw.js` im Projektstamm räumt nur noch einen früher installierten Yuna-Cache ab und meldet sich danach ab. Die Übersicht registriert keinen Service Worker.
 
-Pfade sind relativ, damit die Seite auch unter einem Projektpfad wie `username.github.io/repositoryname/` funktioniert.
-
-## Framed-Bilder
-
-Die Reihenfolge steht in `data/framed.js`. Erwartete Dateien:
-
-1. `framed/01-band.webp`
-2. `framed/02-marktplatz.webp`
-3. `framed/03-haus.webp`
-4. `framed/04-anzug.webp`
-5. `framed/05-bett.jpg`
-
-Es werden nur die dort genannten Dateien geladen. Fehlt eine Datei, erscheint eine Fehlermeldung statt eines kaputten Bildsymbols. Akzeptierte Schreibweisen des Serientitels stehen ebenfalls in `data/framed.js`. Die Bilder für Nis’ Ausgabe liegen in `nis/framed/`.
-
-## Wortliste
-
-`data/words.txt` und `data/words.js` enthalten deutsche Wörter mit fünf Buchstaben. Quellen sind [wordle-helper/words](https://github.com/wordle-helper/words) (Apache-2.0) und [caco3/wordle-de](https://github.com/caco3/wordle-de) (MIT; Wikipedia-Wortliste und OpenThesaurus). Das ist keine vollständige Wörterbuchliste. `KAFFE` ist ergänzt. Englische Wörter, die nicht in dieser Liste stehen, werden abgelehnt.
-
-Nach einer Änderung an `data/words.txt`:
-
-```bash
-python scripts/build-words.py
-```
-
-## Four by Three
-
-Brett, Hub-Wort und Kategorien stehen in `data/four.js`.
+Pfade sind relativ, damit die Seiten auch unter einem Projektpfad funktionieren.
