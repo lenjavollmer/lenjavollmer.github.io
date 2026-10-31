@@ -31,7 +31,7 @@ export function mountFour(root, { onHome }) {
       el("h1", { text: "3 times 4" }),
       el("p", {
         class: "lede",
-        text: "Wähle genau drei Kacheln und schick sie ab. Gefundene Begriffe bleiben im Raster.",
+        text: "Wähle genau drei Kacheln und schick sie ab. Gefundene Begriffe bleiben im Raster und werden blasser.",
       }),
       solvedHost,
       board,
@@ -71,8 +71,10 @@ export function mountFour(root, { onHome }) {
       const pressed = selected.includes(word);
       const used = spent.has(word);
       const knownHub = known && word === HUB;
+      const fadedHub = word === HUB && state.solved.length > 0 && !known;
       const classes = ["word-tile"];
       if (pressed) classes.push("is-selected");
+      if (used || fadedHub) classes.push("is-spent");
       if (knownHub) classes.push("is-hub-known");
       let label = word;
       if (used) label = `${word}, schon gefunden`;
