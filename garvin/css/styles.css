@@ -387,6 +387,10 @@ button:disabled {
   color: #8a817a;
   border-color: #d0c8c0;
 }
+.word-tile.is-spent.is-selected {
+  border-color: var(--focus);
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
 .word-tile.is-spent:disabled { opacity: 0.78; }
 .word-tile.is-hub-known {
   background: linear-gradient(145deg, #fff1e4 0%, #ffe4ee 46%, #e4f6ec 100%);

@@ -23,8 +23,8 @@ node --test garvin/tests/logic.test.mjs
 Die Reihenfolge steht in `data/framed.js`, vom unauffälligeren Bild zum deutlicheren:
 
 1. `framed/01-schwarzweiss.jpg`
-2. `framed/02-feder.jpg`
-3. `framed/03-schokolade.jpg`
+2. `framed/03-schokolade.jpg`
+3. `framed/02-feder.jpg`
 4. `framed/04-rede.jpg`
 5. `framed/05-laufen.jpg`
 

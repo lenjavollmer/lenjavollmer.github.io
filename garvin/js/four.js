@@ -71,9 +71,10 @@ export function mountFour(root, { onHome }) {
       const pressed = selected.includes(word);
       const used = spent.has(word);
       const knownHub = known && word === HUB;
+      const fadedHub = word === HUB && state.solved.length > 0 && !known;
       const classes = ["word-tile"];
       if (pressed) classes.push("is-selected");
-      if (used) classes.push("is-spent");
+      if (used || fadedHub) classes.push("is-spent");
       if (knownHub) classes.push("is-hub-known");
       let label = word;
       if (used) label = `${word}, schon gefunden`;
