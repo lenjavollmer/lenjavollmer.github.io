@@ -32,4 +32,4 @@ Akzeptierte Schreibweisen: Forrest Gump, Forest Gump, ForrestGump.
 
 ## Four by Three
 
-Brett, Kernwort und Kategorien stehen in `data/four.js`. Erratene Begriffe bleiben im Raster und werden blasser. Ab der zweiten gefundenen Gruppe hebt sich das Kernwort farblich ab.
+Brett, Kernwort und Kategorien stehen in `data/four.js`. Erratene Begriffe bleiben im Raster. Ab der zweiten gefundenen Gruppe hebt sich das Kernwort farblich ab.

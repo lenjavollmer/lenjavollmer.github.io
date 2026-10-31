@@ -2,7 +2,7 @@ import { WORDS } from "../data/words.js?v=9";
 import { framedRound } from "../data/framed.js?v=10";
 import { mountWordle } from "./wordle.js?v=9";
 import { mountFramed } from "./framed.js?v=9";
-import { mountFour } from "./four.js?v=10";
+import { mountFour } from "./four.js?v=11";
 import { el } from "./ui.js";
 
 const app = document.querySelector("#app");
