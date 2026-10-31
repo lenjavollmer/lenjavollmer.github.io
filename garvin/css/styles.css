@@ -389,16 +389,16 @@ button:disabled {
   border-color: #cbbbaa;
 }
 .word-tile.is-hub-known {
-  background: linear-gradient(145deg, #fff1e4 0%, #ffe4ee 46%, #e4f6ec 100%);
-  border-color: #b55263;
-  color: #6d2430;
-  box-shadow: 0 0 0 3px rgba(201, 132, 42, 0.35);
+  background: linear-gradient(145deg, #fff4d6 0%, #d9f3e4 48%, #d7e7f8 100%);
+  border-color: #1e5c45;
+  color: #1a4a38;
+  box-shadow: 0 0 0 3px rgba(30, 92, 69, 0.28);
 }
 .word-tile.is-hub-known:disabled { opacity: 1; }
 .word-tile.is-hub-known.is-selected {
-  background: linear-gradient(145deg, #eef4fb 0%, #fff1e4 55%, #ffe4ee 100%);
+  background: linear-gradient(145deg, #fff6e4 0%, #e7f6ee 55%, #eef4fb 100%);
   border-color: var(--focus);
-  box-shadow: inset 0 0 0 2px var(--focus), 0 0 0 3px rgba(201, 132, 42, 0.35);
+  box-shadow: inset 0 0 0 2px var(--focus), 0 0 0 3px rgba(30, 92, 69, 0.28);
 }
 .word-gap { visibility: hidden; }
 
